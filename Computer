@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Computer
 {
     private String choice;
-    public Computer(){
+    pufblic Computer(){
         choice = "";
     }
     
