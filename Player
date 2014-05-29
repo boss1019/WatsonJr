@@ -1,0 +1,36 @@
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import javax.swing.*;
+public class Player 
+{
+    private String choice;
+    public Player()
+    {
+        choice = "";
+    }
+
+    public void makeChoice(){
+        System.out.println("1. rock" + "\r\n" + "2. paper" + "\r\n" + "3. scissors" + "\r\n" + "4.quit");
+        Scanner S = new Scanner(System.in);
+        int temp = S.nextInt();
+        if(temp==1){
+            choice = "rock";
+        }else if(temp==2){
+            choice = "paper";
+        }else if(temp==3){
+            choice = "scissors";
+        }else if(temp==4){
+            choice = "quit";
+        }else{
+            System.out.println("WOAH WHAT YOU TRYING TO PLAY AT HERE!!!!!!!!" );
+            System.out.println("I thought we were just having a game of rock paper scissors");
+            System.out.println("but then you went all NO I DON'T PLAY ROCK PAPER SCISSORS");
+            System.out.println("WELL FACE THE WRATH OF RECURSION!!!!!!! THAT'S RIGHT RECURSION!!!!");
+            makeChoice();
+        }
+    }
+    
+    public String getChoice(){return choice;}
+    
+}
