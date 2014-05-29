@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Computer
 {
     private String choice;
+    
     public Computer(){
         choice = "";
     }
@@ -22,8 +23,19 @@ public class Computer
     
     public void copy(String data){
         String[] temp = data.split(" ");
-        choice = temp[temp.length-1];
+        choice = beat(temp[temp.length-1]);
     }
     
+    public String beat(String toBeat){
+        if(toBeat.equals("rock")){
+            return "paper";
+        }else if(toBeat.equals("paper")){
+            return "scissors";
+        }else if(toBeat.equals("scissors")){
+            return "rock";
+        }else{
+            return "quit";
+        }
+    }
     public String getChoice(){return choice;}
 }
