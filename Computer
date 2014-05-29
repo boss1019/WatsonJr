@@ -1,0 +1,29 @@
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import javax.swing.*;
+public class Computer
+{
+    private String choice;
+    public Computer(){
+        choice = "";
+    }
+    
+    public void makeChoice(){
+        Random r = new Random();
+        if(r.nextInt(1000)<295){
+            choice = "scissors";
+        }else if(r.nextInt(1000)>=295 && r.nextInt(1000)<650){
+            choice = "paper";
+        }else{
+            choice = "rock";
+        }
+    }
+    
+    public void copy(String data){
+        String[] temp = data.split(" ");
+        choice = temp[temp.length-1];
+    }
+    
+    public String getChoice(){return choice;}
+}
