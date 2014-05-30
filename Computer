@@ -26,7 +26,7 @@ public class Computer
         choice = beat(temp[temp.length-1]);
     }
     
-    public String beat(String toBeat){
+    private String beat(String toBeat){
         if(toBeat.equals("rock")){
             return "paper";
         }else if(toBeat.equals("paper")){
@@ -38,4 +38,60 @@ public class Computer
         }
     }
     public String getChoice(){return choice;}
+
+    public String pattern(ArrayList<String> game, ArrayList<String> log){
+        String lastFourMoves = game.get(game.size()-1) + game.get(game.size()-2) + game.get(game.size()-3) + game.get(game.size()-4);
+        String temp = 0;
+        int rockCount = 0;
+        int paperCount = 0;
+        int scissorsCount = 0;
+        
+        for(int i = game.size()-2; i >= 3; i--){
+            temp = game.get(i) + game.get(i-1) + game.get(i-2) + game.get(i-3);
+            if(temp.equals(lastFourMoves)){
+                if(game.get(i+1).equals("rock")){
+                    rockCount++;
+                }else if(game.get(i+1).equals("paper")){
+                    paperCount++;
+                }else if(game.get(i+1).equals("scissors")){
+                    scissorsCount++;
+                }
+            }
+        }
+        
+        if((rockCount + paperCount + scissorsCount) == 0){
+            for(int i = log.size()-2; i >= 3; i--){
+                temp = log.get(i) + log.get(i-1) + log.get(i-2) + log.get(i-3);
+                if(log.equals(lastFourMoves)){
+                    if(log.get(i+1).equals("rock")){
+                        rockCount++;
+                    }else if(log.get(i+1).equals("paper")){
+                        paperCount++;
+                    }else if(log.get(i+1).equals("scissors")){
+                        scissorsCount++;
+                    }
+                }
+            }        
+        }
+        
+        if(rockCount > paperCount){
+            if(rockCount > scissorsCount){
+                return "rock";
+            }else{
+                return "scissors":
+            }
+        }else if(paperCount > scissorsCount){
+            return "paper";
+        }else{
+            return "scissors";
+        }
+    }
+
+
+
+
 }
+
+
+
+
