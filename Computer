@@ -76,14 +76,14 @@ public class Computer
         
         if(rockCount > paperCount){
             if(rockCount > scissorsCount){
-                return "rock";
+                return "paper"; //"rock";
             }else{
-                return "scissors":
+                return "rock'; //"scissors":
             }
         }else if(paperCount > scissorsCount){
-            return "paper";
+            return "scissors"; //"paper";
         }else{
-            return "scissors";
+            return "rock"; //"scissors";
         }
     }
 
