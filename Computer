@@ -5,11 +5,11 @@ import javax.swing.*;
 public class Computer
 {
     private String choice;
-    
+
     public Computer(){
         choice = "";
     }
-    
+
     public void makeChoice(){
         Random r = new Random();
         if(r.nextInt(1000)<295){
@@ -20,12 +20,23 @@ public class Computer
             choice = "rock";
         }
     }
+
+    private void makeChoice(double scissors, double paper, double rock){
+        Random r = new Random();
+        if(r.nextInt(1000)<scissors){
+            choice = "scissors";
+        }else if(r.nextInt(1000)>=paper && r.nextInt(1000)<rock){
+            choice = "paper";
+        }else{
+            choice = "rock";
+        }
+    }
     
     public void copy(String data){
         String[] temp = data.split(" ");
         choice = beat(temp[temp.length-1]);
     }
-    
+
     private String beat(String toBeat){
         if(toBeat.equals("rock")){
             return "paper";
@@ -37,61 +48,52 @@ public class Computer
             return "quit";
         }
     }
+
     public String getChoice(){return choice;}
 
-    public String pattern(ArrayList<String> game, ArrayList<String> log){
+    public void pattern(ArrayList<String> game, ArrayList<String> log){
         String lastFourMoves = game.get(game.size()-1) + game.get(game.size()-2) + game.get(game.size()-3) + game.get(game.size()-4);
-        String temp = 0;
-        int rockCount = 0;
-        int paperCount = 0;
-        int scissorsCount = 0;
-        
+        String temp = "";
+        double rockCount = 0;
+        double paperCount = 0;
+        double scissorsCount = 0;
+
         for(int i = game.size()-2; i >= 3; i--){
             temp = game.get(i) + game.get(i-1) + game.get(i-2) + game.get(i-3);
             if(temp.equals(lastFourMoves)){
                 if(game.get(i+1).equals("rock")){
-                    rockCount++;
+                    rockCount+=2;
                 }else if(game.get(i+1).equals("paper")){
-                    paperCount++;
+                    paperCount+=2;
                 }else if(game.get(i+1).equals("scissors")){
+                    scissorsCount+=2;
+                }
+            }
+        }
+
+        for(int i = log.size()-2; i >= 3; i--){
+            temp = log.get(i) + log.get(i-1) + log.get(i-2) + log.get(i-3);
+            if(log.equals(lastFourMoves)){
+                if(log.get(i+1).equals("rock")){
+                    rockCount++;
+                }else if(log.get(i+1).equals("paper")){
+                    paperCount++;
+                }else if(log.get(i+1).equals("scissors")){
                     scissorsCount++;
                 }
             }
-        }
+        }        
         
-        if((rockCount + paperCount + scissorsCount) == 0){
-            for(int i = log.size()-2; i >= 3; i--){
-                temp = log.get(i) + log.get(i-1) + log.get(i-2) + log.get(i-3);
-                if(log.equals(lastFourMoves)){
-                    if(log.get(i+1).equals("rock")){
-                        rockCount++;
-                    }else if(log.get(i+1).equals("paper")){
-                        paperCount++;
-                    }else if(log.get(i+1).equals("scissors")){
-                        scissorsCount++;
-                    }
-                }
-            }        
-        }
+        double total = rockCount+paperCount+scissorsCount;
+        rockCount = (rockCount/total)*1000;
+        paperCount = (paperCount/total)*1000;
+        scissorsCount = (scissorsCount/total)*1000;
         
-        if(rockCount > paperCount){
-            if(rockCount > scissorsCount){
-                return "paper"; //"rock";
-            }else{
-                return "rock'; //"scissors":
-            }
-        }else if(paperCount > scissorsCount){
-            return "scissors"; //"paper";
-        }else{
-            return "rock"; //"scissors";
-        }
+        makeChoice(scissorsCount, paperCount, rockCount);
+        
     }
 
 
-
-
 }
-
-
 
 
