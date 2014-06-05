@@ -34,9 +34,9 @@ public class Computer
     
     public void copy(String data){
         String[] temp = data.split(" ");
-        choice = beat(temp[temp.length-1]);
+        choice = beat(temp[temp.length-2]);
     }
-
+    
     private String beat(String toBeat){
         if(toBeat.equals("rock")){
             return "paper";
