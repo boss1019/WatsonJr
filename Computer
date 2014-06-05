@@ -12,20 +12,22 @@ public class Computer
 
     public void makeChoice(){
         Random r = new Random();
-        if(r.nextInt(1000)<295){
+        int rand = r.nextInt(1000);
+        if(rand<295){
             choice = "scissors";
-        }else if(r.nextInt(1000)>=295 && r.nextInt(1000)<650){
+        }else if(rand>=295 && rand<650){
             choice = "paper";
         }else{
             choice = "rock";
         }
     }
 
-    private void makeChoice(double scissors, double paper, double rock){
+    private void makeChoice(int scissors, int paper){
         Random r = new Random();
-        if(r.nextInt(1000)<scissors){
+        int rand = r.nextInt(1000);
+        if(rand<scissors){
             choice = "scissors";
-        }else if(r.nextInt(1000)>=paper && r.nextInt(1000)<rock){
+        }else if(rand>=scissors && rand<scissors+paper){
             choice = "paper";
         }else{
             choice = "rock";
@@ -54,9 +56,9 @@ public class Computer
     public void pattern(ArrayList<String> game, ArrayList<String> log){
         String lastFourMoves = game.get(game.size()-1) + game.get(game.size()-2) + game.get(game.size()-3) + game.get(game.size()-4);
         String temp = "";
-        double rockCount = 0;
-        double paperCount = 0;
-        double scissorsCount = 0;
+        int rockCount = 0;
+        int paperCount = 0;
+        int scissorsCount = 0;
 
         for(int i = game.size()-2; i >= 3; i--){
             temp = game.get(i) + game.get(i-1) + game.get(i-2) + game.get(i-3);
@@ -84,12 +86,11 @@ public class Computer
             }
         }        
         
-        double total = rockCount+paperCount+scissorsCount;
-        rockCount = (rockCount/total)*1000;
+        int total = rockCount+paperCount+scissorsCount;
         paperCount = (paperCount/total)*1000;
         scissorsCount = (scissorsCount/total)*1000;
         
-        makeChoice(scissorsCount, paperCount, rockCount);
+        makeChoice(scissorsCount, paperCount);
         
     }
 
