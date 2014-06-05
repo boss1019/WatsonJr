@@ -6,33 +6,28 @@ public class Game{
     private Player human;
     private Computer cpu;
     private int hwin,cwin,tie;
-    FileWriter f,g;
+    FileWriter g;
     Scanner S;
     Scanner a;
     ArrayList<String> log, game;
-    public Game(Player A, Computer B){
+    public Game(Player A, Computer B) throws NullPointerException{
         human = A;
         cpu = B;
         hwin = cwin = tie = 0;
         log = new ArrayList<String>();
         game = new ArrayList<String>();
         try{
-            f = new FileWriter("game.txt");
             g = new FileWriter("log.txt",true);
-            S = new Scanner(new File("game.txt"));
             a = new Scanner(new File("log.txt"));
         }catch(Exception e){
             
-        }
-        while(S.hasNext()){
-            String b = S.nextLine();
-            game.add(b);
         }
         
         while(a.hasNext()){
             String b = a.nextLine();
             log.add(b);
         }
+        
         
     }
     
@@ -45,7 +40,7 @@ public class Game{
         stratagy();
         human.makeChoice();
         whoWins();
-        game.add(human.getChoice() + " " + cpu.getChoice()+ "\r\n");
+        game.add(human.getChoice() + " " + cpu.getChoice()+ " " + "\r\n");
         score();
         if(human.getChoice()!= "quit"){play();}else{
             for(int i = 0;i<game.size();i++){
@@ -54,7 +49,7 @@ public class Game{
                 }catch(Exception e){System.out.println("BEN");}
             }
             try{g.close();}catch(Exception e){System.out.println("BEN");}
-            }
+        }
             
     }
     
@@ -81,116 +76,11 @@ public class Game{
     }
     
     public void stratagy(){
-        if(cwin-hwin>5){
+        if(cwin-hwin>5&&game.size()>0){
             cpu.copy(game.get(game.size()-1));
         }else{
             cpu.makeChoice();
         }
     }
     
-    public String gameText(){
-       return null; 
-    }
-    
-    public String logText(){
-        return null;
-    }
-}
-import java.util.*;
-import java.io.*;
-import java.awt.*;
-import javax.swing.*;
-public class Game{
-    private Player human;
-    private Computer cpu;
-    private int hwin,cwin,tie;
-    FileWriter f,g;
-    Scanner S;
-    Scanner a;
-    ArrayList<String> log, game;
-    public Game(Player A, Computer B){
-        human = A;
-        cpu = B;
-        hwin = cwin = tie = 0;
-        log = new ArrayList<String>();
-        game = new ArrayList<String>();
-        try{
-            f = new FileWriter("game.txt");
-            g = new FileWriter("log.txt",true);
-            S = new Scanner(new File("game.txt"));
-            a = new Scanner(new File("log.txt"));
-        }catch(Exception e){
-            
-        }
-        while(S.hasNext()){
-            String b = S.nextLine();
-            game.add(b);
-        }
-        
-        while(a.hasNext()){
-            String b = a.nextLine();
-            log.add(b);
-        }
-        
-    }
-    
-    public void score(){
-        System.out.println("You-Tie-Computer " + hwin + " " + tie + " " + cwin);
-    }
-    
-    public void play(){
-        String hc = "";
-        stratagy();
-        human.makeChoice();
-        whoWins();
-        game.add(human.getChoice() + " " + cpu.getChoice()+ "\r\n");
-        score();
-        if(human.getChoice()!= "quit"){play();}else{
-            for(int i = 0;i<game.size();i++){
-                try{
-                   g.write(game.get(i));
-                }catch(Exception e){System.out.println("BEN");}
-            }
-            try{g.close();}catch(Exception e){System.out.println("BEN");}
-            }
-            
-    }
-    
-    public void whoWins(){
-        if(human.getChoice().equals(cpu.getChoice())){tie++;}
-        else if(human.getChoice().equals("paper")&&cpu.getChoice().equals("rock")){
-            hwin++;
-        }
-        else if(human.getChoice().equals("paper")&&cpu.getChoice().equals("scissors")){
-            cwin++;
-        }
-        else if(human.getChoice().equals("scissors")&&cpu.getChoice().equals("paper")){
-            hwin++;
-        }
-        else if(human.getChoice().equals("scissors")&&cpu.getChoice().equals("rock")){
-            cwin++;
-        }
-        else if(human.getChoice().equals("rock")&&cpu.getChoice().equals("paper")){
-            cwin++;
-        }
-        else if(human.getChoice().equals("rock")&&cpu.getChoice().equals("scissors")){
-            hwin++;
-        }
-    }
-    
-    public void stratagy(){
-        if(cwin-hwin>5){
-            cpu.copy(game.get(game.size()-1));
-        }else{
-            cpu.makeChoice();
-        }
-    }
-    
-    public String gameText(){
-       return null; 
-    }
-    
-    public String logText(){
-        return null;
-    }
 }
