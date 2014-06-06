@@ -76,8 +76,8 @@ public class Game{
     }
     
     public void stratagy(){
-        if(cwin-hwin>5&&game.size()>0){
-            cpu.copy(game.get(game.size()-1));
+        if(game.size()>4 && log.size()>4){
+            cpu.pattern(game, log);
         }else{
             cpu.makeChoice();
         }
