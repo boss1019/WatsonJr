@@ -26,11 +26,11 @@ public class Computer
         Random r = new Random();
         int rand = r.nextInt(1000);
         if(rand<scissors){
-            choice = "scissors";
-        }else if(rand>=scissors && rand<scissors+paper){
-            choice = "paper";
-        }else{
             choice = "rock";
+        }else if(rand>=scissors && rand<scissors+paper){
+            choice = "scissors";
+        }else{
+            choice = "paper";
         }
     }
     
@@ -63,11 +63,14 @@ public class Computer
         for(int i = game.size()-2; i >= 3; i--){
             temp = game.get(i) + game.get(i-1) + game.get(i-2) + game.get(i-3);
             if(temp.equals(lastFourMoves)){
-                if(game.get(i+1).equals("rock")){
+                String tempo = game.get(i+1);
+                String[] tempor = tempo.split(" ");
+                tempo = tempor[0];
+                if(tempo.equals("rock")){
                     rockCount+=2;
-                }else if(game.get(i+1).equals("paper")){
+                }else if(tempo.equals("paper")){
                     paperCount+=2;
-                }else if(game.get(i+1).equals("scissors")){
+                }else if(tempo.equals("scissors")){
                     scissorsCount+=2;
                 }
             }
@@ -76,11 +79,14 @@ public class Computer
         for(int i = log.size()-2; i >= 3; i--){
             temp = log.get(i) + log.get(i-1) + log.get(i-2) + log.get(i-3);
             if(log.equals(lastFourMoves)){
-                if(log.get(i+1).equals("rock")){
+                String tempo = log.get(i+1);
+                String[] tempor = tempo.split(" ");
+                tempo = tempor[0];
+                if(tempo.equals("rock")){
                     rockCount++;
-                }else if(log.get(i+1).equals("paper")){
+                }else if(tempo.equals("paper")){
                     paperCount++;
-                }else if(log.get(i+1).equals("scissors")){
+                }else if(tempo.equals("scissors")){
                     scissorsCount++;
                 }
             }
